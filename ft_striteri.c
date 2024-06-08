@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkutilko <zkutilko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 18:49:33 by zkutilko          #+#    #+#             */
-/*   Updated: 2024/06/08 15:26:20 by zkutilko         ###   ########.fr       */
+/*   Created: 2024/06/08 14:26:24 by zkutilko          #+#    #+#             */
+/*   Updated: 2024/06/08 14:37:15 by zkutilko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	void	*ptr;
-	size_t	needed;
+	unsigned int	i;
 
-	if (nmemb == 0 || size == 0)
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
 	{
-		ptr = malloc(0);
-		return (ptr);
+		f(i, &s[i]);
+		i++;
 	}
-	needed = nmemb * size;
-	if (needed / nmemb != size)
-		return (NULL);
-	ptr = malloc(needed);
-	if (!ptr)
-		return (ptr);
-	ft_bzero(ptr, size * nmemb);
-	return (ptr);
 }
+// void my_func(unsigned int i, char *c) {
+// 	i = 0;
+//     *c = ft_toupper(*c);
+// }
+// int main(void)
+// {
+// 	char str[] = "Hello there";
+// 	ft_striteri(str, my_func);
+// 	printf("%s", str);
+// }

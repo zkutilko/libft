@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkutilko <zkutilko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 18:49:33 by zkutilko          #+#    #+#             */
-/*   Updated: 2024/06/08 15:26:20 by zkutilko         ###   ########.fr       */
+/*   Created: 2024/06/08 11:13:39 by zkutilko          #+#    #+#             */
+/*   Updated: 2024/06/08 11:57:12 by zkutilko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	void	*ptr;
-	size_t	needed;
+	size_t	i;
 
-	if (nmemb == 0 || size == 0)
-	{
-		ptr = malloc(0);
-		return (ptr);
-	}
-	needed = nmemb * size;
-	if (needed / nmemb != size)
-		return (NULL);
-	ptr = malloc(needed);
-	if (!ptr)
-		return (ptr);
-	ft_bzero(ptr, size * nmemb);
-	return (ptr);
+	if (!s1 || !set)
+		return (0);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen(s1);
+	while (i && ft_strchr(set, s1[i]))
+		i--;
+	return (ft_substr(s1, 0, i + 1));
 }
+
+// int main(void)
+// {
+// 	char s[] = "   gdkdbhbd  ";
+// 	char set[] = " ";
+// 	char *test;
+
+// 	test = ft_strtrim(s, set);
+// 	printf("%s", test);
+
+// }
